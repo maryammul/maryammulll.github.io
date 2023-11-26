@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CGPA Calculator</title>
+</head>
+<body>
+  <h2>CGPA Calculator</h2>
+  <form id="cgpaForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="matricId">Matric ID:</label>
+    <input type="text" id="matricId" name="matricId" required><br><br>
+    <label for="webAppGrade">Web Application Grade:</label>
+    <input type="number" id="webAppGrade" name="webAppGrade" min="0" max="100" required><br><br>
+    <label for="probabilityGrade">Probability Grade:</label>
+    <input type="number" id="probabilityGrade" name="probabilityGrade" min="0" max="100" required><br><br>
+    <label for="systemAnalysisGrade">System Analysis Grade:</label>
+    <input type="number" id="systemAnalysisGrade" name="systemAnalysisGrade" min="0" max="100" required><br><br>
+    <label for="databaseGrade">Database Grade:</label>
+    <input type="number" id="databaseGrade" name="databaseGrade" min="0" max="100" required><br><br>
+    <label for="falsafahGrade">Falsafah Grade:</label>
+    <input type="number" id="falsafahGrade" name="falsafahGrade" min="0" max="100" required><br><br>
+    <label for="informationSecurityGrade">Information Security Grade:</label>
+    <input type="number" id="informationSecurityGrade" name="informationSecurityGrade" min="0" max="100" required><br><br>
+    <input type="submit" value="Calculate">
+  </form>
+
+  <h2>Result</h2>
+  <p id="result"></p>
+
+  <script>
+    document.getElementById('cgpaForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Calculate CGPA and determine status
+      // Retrieve input values
+      let name = document.getElementById('name').value;
+      let matricId = document.getElementById('matricId').value;
+      let webAppGrade = parseFloat(document.getElementById('webAppGrade').value);
+      let probabilityGrade = parseFloat(document.getElementById('probabilityGrade').value);
+      let systemAnalysisGrade = parseFloat(document.getElementById('systemAnalysisGrade').value);
+      let databaseGrade = parseFloat(document.getElementById('databaseGrade').value);
+      let falsafahGrade = parseFloat(document.getElementById('falsafahGrade').value);
+      let informationSecurityGrade = parseFloat(document.getElementById('informationSecurityGrade').value);
+      // Calculate CGPA (assuming all subjects have equal credit hours)
+      let totalCreditHours = 20;
+      let totalQualityPoints = (
+        (webAppGrade + probabilityGrade + systemAnalysisGrade + databaseGrade + falsafahGrade + informationSecurityGrade) /
+        6
+      ) * totalCreditHours;
+      let cgpa = totalQualityPoints / totalCreditHours;
+      // Determine status
+      let status = '';
+      if (cgpa >= 3.5) {
+        status = 'Excellent';
+      } else if (cgpa < 2.0) {
+        status = 'Failed';
+      } else {
+        status = 'Dean\'s List';
+      }
+      // Display result
+      document.getElementById('result').innerText = `Name: ${name}, Matric ID: ${matricId}, Status: ${status}`;
+    });
+  </script>
+</body>
+</html>
